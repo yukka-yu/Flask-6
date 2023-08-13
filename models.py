@@ -1,6 +1,5 @@
-import decimal
 from pydantic import BaseModel, Field, EmailStr
-from datetime import date
+from datetime import date, datetime
 
 class User(BaseModel):
     id: int
@@ -27,14 +26,14 @@ class ProductIn(BaseModel):
 
 class Order(BaseModel):
     id: int
-    user: User
-    product: list[Product]
-    date: date = Field(..., title="Date of order")
-    is_delivered: bool = Field(..., title="Is delivered")
+    user: User = Field(..., )
+    product: Product = Field(..., )
+    date: datetime = Field(None, title="Date of order")
+    is_delivered: bool = Field(None, title="Is delivered")
 
 class OrderIn(BaseModel):
     user_id: int = Field(..., title="id of user")
     product_id: int = Field(..., title="id of product")
-    date: date = Field(..., title="Date of order")
-    is_delivered: bool = Field(..., title="Is delivered")
+    date: datetime = Field(None, title="Date of order")
+    is_delivered: bool = Field(None, title="Is delivered")
 
